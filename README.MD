@@ -2,7 +2,7 @@
 * 16 bit addition
 * Sum of n numbers
 * Count of odd and even numbers
-* Largest amoung n numbers
+* Largest among n numbers
 * Display a string
 * Change the case of characters
 * Print system date
