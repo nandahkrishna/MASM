@@ -1,39 +1,37 @@
-assume cs:code,ds:data
-data segment 
-	count db 00h
-	numbers db 10 dup(0)
-	oddcount db 00h
-	evencount db 00h
-data ends
-code segment
-        org 1000h
-start:  mov ax,data
-        mov ds,ax
-	
-	mov si,offset numbers
-	mov cl,count
-	mov ax,0000h
-	mov bl,00h
-	mov bh,02h
-	mov dl,00h
-	inc cl
-scanlist:mov al,[si]
-	inc si
-	dec cl
-	jz store
-	div bh
-	or ah,00h
-	jnz odd
-	inc bl
-	jmp scanlist
-odd:	inc dl
-	jmp scanlist
-store:	mov si,offset evencount
-	mov [si],bl
-	mov si,offset oddcount
-	mov [si],dl
-        
-       	mov ah,4ch
-        int 21h
-	code ends
-end start
+ASSUME CS:CODE,DS:DATA
+DATA SEGMENT 
+	COUNT DB 00H
+	NUMBERS DB 10 DUP(0)
+	ODDCOUNT DB 00H
+	EVENCOUNT DB 00H
+DATA ENDS
+CODE SEGMENT
+        ORG 1000H
+START:  MOV AX,DATA
+        MOV DS,AX
+	MOV SI,OFFSET NUMBERS
+	MOV CL,COUNT
+	MOV AX,0000H
+	MOV BL,00H
+	MOV BH,02H
+	MOV DL,00H
+	INC CL
+SCANLIST:MOV AL,[SI]
+	INC SI
+	DEC CL
+	JZ STORE
+	DIV BH
+	OR AH,00H
+	JNZ ODD
+	INC BL
+	JMP SCANLIST
+ODD:	INC DL
+	JMP SCANLIST
+STORE:	MOV SI,OFFSET EVENCOUNT
+	MOV [SI],BL
+	MOV SI,OFFSET ODDCOUNT
+	MOV [SI],DL
+       	MOV AH,4CH
+        INT 21H
+CODE ENDS
+END START

@@ -1,28 +1,25 @@
-assume cs:code,ds:data
-data segment 
-	count db 00h
-	numbers db 10 dup(0)
-	result db 00h
-data ends
-code segment
-        org 1000h
-start:  mov ax,data
-        mov ds,ax
-	
-	mov si,offset numbers
-	mov cl,count
-	
-carry: mov al,[si]
-other: inc si
-	dec cl
-	jz finish
-nonzero:cmp al,[si]
-	jc carry
-	jmp other
-finish: mov si,offset result
-	mov [si],al
-        
-       	mov ah,4ch
-        int 21h
-	code ends
-end start
+ASSUME CS:CODE,DS:DATA
+DATA SEGMENT 
+	COUNT DB 00H
+	NUMBERS DB 10 DUP(0)
+	RESULT DB 00H
+DATA ENDS
+CODE SEGMENT
+        ORG 1000H
+START:  MOV AX,DATA
+        MOV DS,AX
+	MOV SI,OFFSET NUMBERS
+	MOV CL,COUNT
+CARRY: MOV AL,[SI]
+OTHER: INC SI
+	DEC CL
+	JZ FINISH
+NONZERO:CMP AL,[SI]
+	JC CARRY
+	JMP OTHER
+FINISH: MOV SI,OFFSET RESULT
+	MOV [SI],AL
+       	MOV AH,4CH
+        INT 21H
+CODE ENDS
+END START

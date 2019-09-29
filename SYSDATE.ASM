@@ -1,32 +1,22 @@
-assume cs:code,ds:data
-data segment 
-	day db 01 dup(?)
-	month db 01 dup(?)
-	year db 02 dup(?)
-data ends
-code segment
-        org 0100h
-start:  mov ax,data
-        mov ds,ax
-
-        
-    ;system date
-;INT 21h /AH=2Ah - get system date;
-;return:CX= year (1980-2099).DH= month. DL= day.AL= day of week (00h=Sunday)     
-        
-       	mov ah,2ah
-        int 21h
-     
-mov si,offset day
-        mov [si],dl
-
-mov si,offset month
-        mov [si],dh
-
-mov si,offset year
-        mov [si],cx
-
-	mov ah,4ch
-        int 21h
-	code ends
-end start
+ASSUME CS:CODE,DS:DATA
+DATA SEGMENT 
+	DAY DB 01 DUP(?)
+	MONTH DB 01 DUP(?)
+	YEAR DB 02 DUP(?)
+DATA ENDS
+CODE SEGMENT
+        ORG 1000H
+START:  MOV AX,DATA
+        MOV DS,AX  
+       	MOV AH,2AH
+        INT 21H
+	MOV SI,OFFSET DAY
+        MOV [SI],DL
+	MOV SI,OFFSET MONTH
+        MOV [SI],DH
+	MOV SI,OFFSET YEAR
+        MOV [SI],CX
+	MOV AH,4CH
+        INT 21H
+CODE ENDS
+END START
